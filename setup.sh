@@ -1,11 +1,6 @@
-user=app
-password=`openssl rand -base64 32`
-echo "$user:$password:::::" > users.txt
-
-#Add app user
-newusers users.txt
-usermod -a -G sudo $user
-cp -R .ssh /home/$user
+#!/bin/bash
+user=$1
+cp -R /root/.ssh /home/$user
 chown +R $user:$user /home/$user/.ssh
 
 #Git
