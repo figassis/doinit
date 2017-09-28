@@ -1,7 +1,7 @@
 #!/bin/bash
 user=$1
 cp -R /root/.ssh /home/$user
-chown +R $user:$user /home/$user/.ssh
+chown -R $user:$user /home/$user/.ssh
 
 #Git
 sudo apt-get -y install git ufw
