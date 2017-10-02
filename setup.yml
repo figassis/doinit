@@ -8,6 +8,7 @@ users:
     ssh-authorized-keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaVhBCM9VvLxnLOPWHLmLMvp7eDfunLQXyj3XfQpY4Jb0YsDsaoRRhGRGwRhCSPIEGT/dX2+8E3PBAn+Jhz5wJjTBJ+5bHb+CE6zjuIgc57yvDQOYBi1tsxHiiieTmf9PyXdqDkxSiaAwISWUTZ1SJ930u3TWIPorgTG/DYoDDfJOXHLNlkcDCOF4RuGM52raNqXs8C6PzFw+IwofjdkrCULtn6PkuZWyYufX4oaqzhVvM8PyLP/lvUFpoBAehY4CQCoV7BKYmSMqxzMgxYocbnrTLDLXiRZ9HxhWhcO18F/BS4fZstxGv4hGcOwg6G2HpvKg/tPeSx/zkrZKVecnp assis@angolo.local
 runcmd:
+  - apt-get update
   - apt-get -y install git ufw
   - sudo ufw default deny incoming
   - sudo ufw default allow outgoing
