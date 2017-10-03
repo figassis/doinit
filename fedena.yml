@@ -1,0 +1,26 @@
+#cloud-config
+users:
+  - name: app
+    groups: sudo
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    lock-passwd: 'True'
+    ssh-authorized-keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaVhBCM9VvLxnLOPWHLmLMvp7eDfunLQXyj3XfQpY4Jb0YsDsaoRRhGRGwRhCSPIEGT/dX2+8E3PBAn+Jhz5wJjTBJ+5bHb+CE6zjuIgc57yvDQOYBi1tsxHiiieTmf9PyXdqDkxSiaAwISWUTZ1SJ930u3TWIPorgTG/DYoDDfJOXHLNlkcDCOF4RuGM52raNqXs8C6PzFw+IwofjdkrCULtn6PkuZWyYufX4oaqzhVvM8PyLP/lvUFpoBAehY4CQCoV7BKYmSMqxzMgxYocbnrTLDLXiRZ9HxhWhcO18F/BS4fZstxGv4hGcOwg6G2HpvKg/tPeSx/zkrZKVecnp assis@angolo.local
+runcmd:
+  - apt-get -y install git ufw
+  - sudo ufw default deny incoming
+  - sudo ufw default allow outgoing
+  - sudo ufw allow 22
+  - sudo ufw allow 443
+  - sudo ufw allow 80
+  - sudo ufw enable
+  - sed -i -e '$aAllowUsers app' /etc/ssh/sshd_config
+  - sudo sed -i 's|[#]*PasswordAuthentication yes|PasswordAuthentication no|g' /etc/ssh/sshd_config
+  - sudo sed -i 's|UsePAM yes|UsePAM no|g' /etc/ssh/sshd_config
+  - sed -i -e '/^PermitRootLogin/s/^.*$/PermitRootLogin no/' /etc/ssh/sshd_config
+  - restart ssh
+  - su - app -c "git config --global user.email figassis@gmail.com"
+  - su - app -c "git config --global user.name Nellcorp"
+  - su - app -c "git clone https://github.com/figassis/fedena"
+  - su - app -c "cd fedena && sudo ./setup.sh cef.nellcorp.com"
