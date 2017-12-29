@@ -11,11 +11,8 @@ runcmd:
   - apt-get update
   - apt-get install software-properties-common
   - sudo apt-add-repository ppa:ansible/ansible
-  - deb http://download.virtualbox.org/virtualbox/debian xenial contrib
-  - wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-  - wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
   - sudo apt-get update
-  - sudo apt-get install git ufw virtualbox-5.2 vagrant ansible
+  - sudo apt-get install git ufw virtualbox vagrant ansible
   - vagrant box add ubuntu/xenial64
   - sudo ufw default deny incoming
   - sudo ufw default allow outgoing
